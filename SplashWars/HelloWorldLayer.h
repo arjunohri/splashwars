@@ -20,12 +20,19 @@
 //to define the ratio so that your most common object type is 1x1 metre.
 #define PTM_RATIO 32
 
+@class PhysicsSprite;
+
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
 	CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
+    
+    CGPoint flingStartPosition;
+    CCSprite* flingStartPositionSprite;
+    CCSprite *flingSprite;
+    
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

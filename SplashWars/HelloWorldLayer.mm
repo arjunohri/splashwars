@@ -23,7 +23,7 @@ enum {
 
 @interface HelloWorldLayer()
 -(void) initPhysics;
--(void) addNewSpriteAtPosition:(CGPoint)p;
+-(void) addNewSpriteAtPosition:(CGPoint)p  applyImpulse:(b2Vec2)impulse;
 -(void) createMenu;
 @end
 
@@ -58,9 +58,22 @@ enum {
 		[self initPhysics];
 		
 		// create reset button
-		[self createMenu];
+		//[self createMenu];
 		
 		//Set up sprite
+        CCSprite *background;
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        
+        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
+            background = [CCSprite spriteWithFile:@"land1.png"];
+            //background.rotation = 90;
+        } else {
+            background = [CCSprite spriteWithFile:@"Default-Landscape~ipad.png"];
+        }
+        background.position = ccp(size.width/2, size.height/2);
+        
+        // add the label as a child to this Layer
+        [self addChild: background];
 		
 #if 1
 		// Use batch node. Faster
@@ -74,10 +87,10 @@ enum {
 		[self addChild:parent z:0 tag:kTagParentNode];
 		
 		
-		[self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
+		//[self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
 		
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
-		[self addChild:label z:0];
+		//self addChild:label z:0];
 		[label setColor:ccc3(0,0,255)];
 		label.position = ccp( s.width/2, s.height-50);
 		
@@ -221,7 +234,7 @@ enum {
 	kmGLPopMatrix();
 }
 
--(void) addNewSpriteAtPosition:(CGPoint)p
+-(void) addNewSpriteAtPosition:(CGPoint)p applyImpulse:(b2Vec2)impulse
 {
 	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
 	CCNode *parent = [self getChildByTag:kTagParentNode];
@@ -230,9 +243,10 @@ enum {
 	//just randomly picking one of the images
 	int idx = (CCRANDOM_0_1() > .5 ? 0:1);
 	int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-	PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];						
-	[parent addChild:sprite];
-	
+	PhysicsSprite *sprite = [PhysicsSprite spriteWithFile:@"balloon_red_small.png"];
+    //[PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];
+
+	[self addChild:sprite];
 	sprite.position = ccp( p.x, p.y);
 	
 	// Define the dynamic body.
@@ -254,6 +268,9 @@ enum {
 	body->CreateFixture(&fixtureDef);
 	
 	[sprite setPhysicsBody:body];
+    
+    //body->ApplyForceToCenter(b2Vec2(10, 0));
+    body->ApplyLinearImpulse(impulse, body->GetPosition());
 }
 
 -(void) update: (ccTime) dt
@@ -271,16 +288,51 @@ enum {
 	world->Step(dt, velocityIterations, positionIterations);	
 }
 
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView: [touch view]];
+    
+    flingStartPosition = [[CCDirector sharedDirector] convertToGL: location];
+    flingStartPositionSprite = [CCSprite spriteWithFile:@"aim.png"];
+    flingSprite = [CCSprite spriteWithFile:@"balloon_red_small.png"];
+    
+    flingStartPositionSprite.position = flingStartPosition;
+    flingSprite.position = flingStartPosition;
+    
+    //CCNode *parent = [self getChildByTag:kTagParentNode];
+    [self addChild:flingStartPositionSprite];
+    [self addChild:flingSprite];
+    
+   
+}
+
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+	UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView: [touch view]];
+	location = [[CCDirector sharedDirector] convertToGL: location];
+    
+    flingSprite.position = location;
+}
+
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
+    [flingStartPositionSprite removeFromParentAndCleanup:YES];
+    flingStartPositionSprite = nil;
+    [flingSprite removeFromParentAndCleanup:YES];
+    flingSprite = nil;
 	//Add a new body/atlas sprite at the touched location
-	for( UITouch *touch in touches ) {
-		CGPoint location = [touch locationInView: [touch view]];
-		
-		location = [[CCDirector sharedDirector] convertToGL: location];
-		
-		[self addNewSpriteAtPosition: location];
-	}
+	UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView: [touch view]];
+    
+    location = [[CCDirector sharedDirector] convertToGL: location];
+    
+    float divFactor = 3.0;
+    b2Vec2 impulse = b2Vec2((flingStartPosition.x - location.x)/divFactor, (flingStartPosition.y - location.y)/divFactor);
+    [self addNewSpriteAtPosition: location applyImpulse:impulse];
 }
 
 #pragma mark GameKit delegate
