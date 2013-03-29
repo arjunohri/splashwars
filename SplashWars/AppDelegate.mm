@@ -10,17 +10,42 @@
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
+#import <Parse/Parse.h>
 
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
 
+// Method added to AppDelegate to support Single Signon for Facebook SDK
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [PFFacebookUtils handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [PFFacebookUtils handleOpenURL:url];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    //  Parse setup code
+    [Parse setApplicationId:@"XJ26jAFZAhaVjU9NV3mBG1jiumaH4GuLpQW2txoW"
+                  clientKey:@"pMjakDixzfqSL8OX8KlfwnzwxU1x8XCAisASlAlb"];
+
+    //  Parse: track statistics around application open
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    //  Initialize Facebook within Parse
+    [PFFacebookUtils initializeFacebook];
+    
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
-	
+    // Show Login modal
+    
+    
+    
 	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
 	CCGLView *glView = [CCGLView viewWithFrame:[window_ bounds]
 								   pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
