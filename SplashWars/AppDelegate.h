@@ -34,4 +34,6 @@
 - (void)setupParse:(NSDictionary *)launchOptions;
 - (void)fbLoginSuccessful;
 
+-(void)loadCocosView;
+
 @end

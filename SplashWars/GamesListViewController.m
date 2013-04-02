@@ -7,6 +7,7 @@
 //
 
 #import "GamesListViewController.h"
+#import "AppDelegate.h"
 
 @interface GamesListViewController ()
 
@@ -92,7 +93,7 @@
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    [appDelegate loadCocosView];
 }
 
 
