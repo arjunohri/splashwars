@@ -52,22 +52,10 @@
 	// set the Navigation Controller as the root view controller
     //	[window_ addSubview:navController_.view];	// Generates flicker.
 	[window_ setRootViewController:navController_];
-	
+
+    //[self checkFacebookLogin];
     
-    // Facebook login flow
-    // check if user is already logged in
-    if ([PFUser currentUser] && // Check if a user is cached
-        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook
-    {
-        // Do not show login flow
-        [navController_ pushViewController:self.gamesListViewController animated:NO];
-        
-    } else {
-        // Show login flow
-        self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-        [navController_ pushViewController:self.loginViewController animated:NO];
-    }
-    
+    [navController_ pushViewController:self.gamesListViewController animated:NO];
     
 	// make main window visible
 	[window_ makeKeyAndVisible];
@@ -86,6 +74,24 @@
     
     //  Initialize Facebook within Parse
     [PFFacebookUtils initializeFacebook];
+}
+
+- (void)checkFacebookLogin
+{
+    
+    // Facebook login flow
+    // check if user is already logged in
+    if ([PFUser currentUser] && // Check if a user is cached
+        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook
+    {
+        // Do not show login flow
+        [navController_ pushViewController:self.gamesListViewController animated:NO];
+        
+    } else {
+        // Show login flow
+        self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        [navController_ pushViewController:self.loginViewController animated:NO];
+    }
 }
 
 - (void)fbLoginSuccessful

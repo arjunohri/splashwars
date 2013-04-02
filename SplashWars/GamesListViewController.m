@@ -53,11 +53,15 @@
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"SWGamesListCell"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"SWGamesListCell"];
-        UIImage *pic = [UIImage imageNamed:@"balloon_red_small.png"];
-        cell.imageView.image = pic;
+        UIImage *pic = [UIImage imageNamed:@"face_1.png"];
         cell.textLabel.text = [games objectAtIndex:[indexPath row]];
+        if ([indexPath row]%2) {
+            pic = [UIImage imageNamed:@"face_2.png"];
+            cell.textLabel.text = @"Whitney";
+        }
+        cell.imageView.image = pic;
         cell.detailTextLabel.text = @"Play now!";
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         //UIColor *bgColor = [UIColor colorWithRed:30/255.0f green:152/255.0f blue:255/255.0f alpha:0.5f];
         //cell.backgroundColor = bgColor;
     }
@@ -75,7 +79,7 @@
 {
     // Add a new item to the games array
     
-    [games addObject:@"Player 1"];
+    [games addObject:@"Whitney"];
     
     // Make a new index path for the 0th section, last row
     int lastRow = [games count] - 1;
