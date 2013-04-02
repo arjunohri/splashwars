@@ -142,9 +142,6 @@ static HelloWorldLayer* _hWorldLayer = nil;
 
 -(void)loadSounds
 {
-    [SimpleAudioEngine sharedEngine].effectsVolume =1.0;
-    [SimpleAudioEngine sharedEngine].backgroundMusicVolume = 1.0;
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"loading_music.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"hit-response-1.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"hit-response-2.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"hit-response-3.mp3"];

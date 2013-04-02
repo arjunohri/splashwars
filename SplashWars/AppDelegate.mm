@@ -16,6 +16,7 @@
 #import "LoginViewController.h"
 #import "GamesListViewController.h"
 #import "DataManager.h"
+#import "SimpleAudioEngine.h"
 
 @implementation AppController
 
@@ -62,12 +63,18 @@
 	// make main window visible
 	[window_ makeKeyAndVisible];
 	
+    [SimpleAudioEngine sharedEngine].effectsVolume =1.0;
+    [SimpleAudioEngine sharedEngine].backgroundMusicVolume = 1.0;
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"loading_music.mp3"];
+    
+    
 	return YES;
 }
 
 -(void)loadCocosView
 {
-     
+    
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
      // Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
      CCGLView *glView = [CCGLView viewWithFrame:[window_ bounds]
      pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
