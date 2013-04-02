@@ -25,7 +25,7 @@ enum {
 
 @interface HelloWorldLayer()
 -(void) initPhysicsWithWorldSize:(CGSize)worldSize;
--(void) addNewSpriteAtPosition:(CGPoint)p  applyImpulse:(b2Vec2)impulse size:(float)bSize;
+-(BalloonSprite*) addNewSpriteAtPosition:(CGPoint)p  applyImpulse:(b2Vec2)impulse size:(float)bSize;
 -(void) createMenu;
 @end
 
@@ -72,6 +72,8 @@ static HelloWorldLayer* _hWorldLayer = nil;
 		self.isAccelerometerEnabled = YES;
         
         physicsBodiesToBeDeleted = [[NSMutableArray alloc] init];
+        p1Balloons = [[NSMutableArray alloc] init];
+        p2Balloons = [[NSMutableArray alloc] init];
         
 		// create reset button
 		//[self createMenu];
@@ -279,6 +281,10 @@ static HelloWorldLayer* _hWorldLayer = nil;
 	m_debugDraw = NULL;
     
     [physicsBodiesToBeDeleted release];
+    [p1Balloons removeAllObjects];
+    [p2Balloons removeAllObjects];
+    [p1Balloons release];
+    [p2Balloons release];
 	
 	[super dealloc];
 }	
@@ -447,18 +453,12 @@ static HelloWorldLayer* _hWorldLayer = nil;
 	kmGLPopMatrix();
 }
 
--(void) addNewSpriteAtPosition:(CGPoint)p applyImpulse:(b2Vec2)impulse size:(float)bSize
+-(BalloonSprite*) addNewSpriteAtPosition:(CGPoint)p applyImpulse:(b2Vec2)impulse size:(float)bSize
 {
 	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
-	CCNode *parent = [self getChildByTag:kTagParentNode];
-	
-	//We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
-	//just randomly picking one of the images
-	int idx = (CCRANDOM_0_1() > .5 ? 0:1);
-	int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-	BalloonSprite *sprite = [BalloonSprite spriteWithFile:@"balloon_red_small.png"];
-    //[PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];
-
+	BalloonSprite *sprite = [BalloonSprite spriteWithTexture:flingSprite.texture];
+    
+    sprite.scale = bSize/MAX_BALLOON_SIZE;
     sprite.balloonSize = bSize;
 	[background addChild:sprite];
 	sprite.position = ccp( p.x, p.y);
@@ -473,8 +473,6 @@ static HelloWorldLayer* _hWorldLayer = nil;
 	// Define another box shape for our dynamic body.
     b2CircleShape circle;
     circle.m_radius = 16.0/PTM_RATIO;
-	//b2PolygonShape dynamicBox;
-	//dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
 	
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
@@ -503,6 +501,7 @@ static HelloWorldLayer* _hWorldLayer = nil;
     NSString *sound = [NSString stringWithFormat:@"launch-%d.mp3",soundnum];
     [[SimpleAudioEngine sharedEngine] playEffect:sound];
     
+    return sprite;
 }
 
 -(void) update: (ccTime) dt
@@ -554,6 +553,33 @@ static HelloWorldLayer* _hWorldLayer = nil;
     return sqrtf(xdiff*xdiff + ydiff*ydiff);
 }
 
+-(void)tickBalloonSpriteSize:(ccTime)dt
+{
+    flingSpriteBalloonSize+= dt/0.5f;
+    if(flingSpriteBalloonSize>MAX_BALLOON_SIZE)
+    {
+        flingSpriteBalloonSize = MAX_BALLOON_SIZE;
+        [self unschedule:@selector(tickBalloonSpriteSize:)];
+        BalloonSprite* bal = [self addNewSpriteAtPosition: flingSprite.position applyImpulse:b2Vec2(0,0) size:flingSpriteBalloonSize];
+        //numBaloonsLeftInCurrentTurn--;
+        [self cleanupFlingSpriteAndRubberbands];
+        
+        //burst the balloon and impact current player
+        bal.physicsBody->SetActive(NO);
+        [self balloonDidBurst:bal];
+        if(whichPlayersTurn == kPlayer1)
+            [p1Sprite hitByBalloon:flingSpriteBalloonSize];
+        else
+            [p2Sprite hitByBalloon:flingSpriteBalloonSize];
+        
+        isGoingToShoot = NO;
+        isInScrollingMode = NO;
+        return;
+    }
+    
+    flingSprite.scale = flingSpriteBalloonSize/MAX_BALLOON_SIZE;
+}
+
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
@@ -562,7 +588,7 @@ static HelloWorldLayer* _hWorldLayer = nil;
     location = [background convertToNodeSpace:location];
     
     isInScrollingMode = YES;
-    
+    //[background stopActionByTag:kTag_CCFollowAction];
     //find distance between touch location and shooting centre
     
     isGoingToShoot = NO;
@@ -595,14 +621,17 @@ static HelloWorldLayer* _hWorldLayer = nil;
     if(isGoingToShoot)
     {
         isInScrollingMode = NO;
+        flingSprite = [self consumeBalloon];
         
-        flingSprite = [CCSprite spriteWithFile:@"balloon_red_small.png"];
+        //flingSprite = [CCSprite spriteWithFile:@"balloon_blue.png"];
         float ang = -180*atan((flingStartPosition.y - location.y)/(flingStartPosition.x - location.x)) / 3.14 ;
         if(flingStartPosition.x < location.x)
             ang = ang +180;
         flingSprite.rotation = ang;
-        
         flingSprite.position = flingStartPosition;
+        flingSprite.scale = 0.5;
+        flingSpriteBalloonSize = 15;
+        [self schedule:@selector(tickBalloonSpriteSize:)];
         
         
        
@@ -673,25 +702,54 @@ static HelloWorldLayer* _hWorldLayer = nil;
     
     if(isGoingToShoot)
     {
+        [self unschedule:@selector(tickBalloonSpriteSize:)];
+        
         float divFactor = 3.0;
         b2Vec2 impulse = b2Vec2((flingStartPosition.x - location.x)/divFactor, (flingStartPosition.y - location.y)/divFactor);
 
-        [self addNewSpriteAtPosition: location applyImpulse:impulse size:10];
-        [flingSprite removeFromParentAndCleanup:YES];
-        flingSprite = nil;
+        [self addNewSpriteAtPosition: location applyImpulse:impulse size:flingSpriteBalloonSize];
         
-        [line1 removeFromParentAndCleanup:YES];
-        line1 = nil;
-        [line2 removeFromParentAndCleanup:YES];
-        line2 = nil;
+        //numBaloonsLeftInCurrentTurn--;
         
-        numBaloonsLeftInCurrentTurn--;
+        [self cleanupFlingSpriteAndRubberbands];
         
     }
     
     isGoingToShoot = NO;
     isInScrollingMode = NO;
 }
+
+-(void)cleanupFlingSpriteAndRubberbands
+{
+    [flingSprite removeFromParentAndCleanup:YES];
+    flingSprite = nil;
+    
+    [line1 removeFromParentAndCleanup:YES];
+    line1 = nil;
+    [line2 removeFromParentAndCleanup:YES];
+    line2 = nil;
+}
+
+-(CCSprite*)consumeBalloon
+{
+    CCSprite* b;
+    if(whichPlayersTurn == kPlayer1)
+    {
+        b = [[p1Balloons lastObject] retain];
+        [b removeFromParentAndCleanup:YES];
+        [p1Balloons removeObject:b];
+    }
+    else
+    {
+        b = [[p2Balloons lastObject] retain];
+        [b removeFromParentAndCleanup:YES];
+        [p2Balloons removeObject:b];
+    }
+    
+    numBaloonsLeftInCurrentTurn--;
+    return b;
+}
+
 
 -(void) checkAndSwitchPlayersTurn
 {
@@ -706,6 +764,17 @@ static HelloWorldLayer* _hWorldLayer = nil;
             leftMound->SetActive(YES);
             rightMound->SetActive(NO);
             str=@"yourturn_arjun.png";
+            
+            for(int i=0;i<3;i++)
+            {
+                int num = arc4random()%4 + 1;
+                CCSprite* b = [CCSprite spriteWithFile:[NSString stringWithFormat:@"balloon%d.png",num]];
+                [p2Balloons addObject:b];
+                b.scale = 0.5;
+                b.rotation = arc4random()%180;
+                b.position = ccpAdd(p2Sprite.position,ccp((i-1)*20,- p2Sprite.contentSize.height/2 -20));
+                [p2Sprite.parent addChild:b];
+            }
         }else{
             whichPlayersTurn = kPlayer1;
             p1Sprite.physicsBody->SetActive(NO);
@@ -713,6 +782,17 @@ static HelloWorldLayer* _hWorldLayer = nil;
             leftMound->SetActive(NO);
             rightMound->SetActive(YES);
             str=@"yourturn_whitney.png";
+            
+            for(int i=0;i<3;i++)
+            {
+                int num = arc4random()%4 + 1;
+                CCSprite* b = [CCSprite spriteWithFile:[NSString stringWithFormat:@"balloon%d.png",num]];
+                [p1Balloons addObject:b];
+                b.scale = 0.5;
+                b.rotation = arc4random()%180;
+                b.position = ccpAdd(p1Sprite.position,ccp((i-1)*20,-p1Sprite.contentSize.height/2 -20));
+                [p1Sprite.parent addChild:b];
+            }
         }
         numBaloonsLeftInCurrentTurn = 3;
         
@@ -739,8 +819,12 @@ static HelloWorldLayer* _hWorldLayer = nil;
 
 -(void)playerLost:(PlayerSprite*)p
 {
-    UIImageView* iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"winner.png"]];
-    [[UIApplication sharedApplication].keyWindow addSubview:iv];
+    CGSize s = [CCDirector sharedDirector].winSize;
+    CCSprite* winScreen = [CCSprite spriteWithFile:@"winner.png"];
+    winScreen.position = ccp(s.width/2,s.height/2);
+    winScreen.scale = 0.1;
+    [winScreen runAction:[CCScaleTo actionWithDuration:0.2 scale:1.0]];
+    [self addChild:winScreen z:300];
 }
 
 #pragma mark GameKit delegate

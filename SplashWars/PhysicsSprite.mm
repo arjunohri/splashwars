@@ -99,9 +99,46 @@
 
 -(CGAffineTransform) nodeToParentTransform
 {
-    transform_ = [super nodeToParentTransform];
-    
+    b2Vec2 pos  = body_->GetPosition();
+	
+	float x = pos.x * PTM_RATIO;
+	float y = pos.y * PTM_RATIO;
+	
+	if ( ignoreAnchorPointForPosition_ ) {
+		x += anchorPointInPoints_.x;
+		y += anchorPointInPoints_.y;
+	}
+	
+	// Make matrix
+	//float radians = body_->GetAngle();
+	//float c = cosf(radians);
+	//float s = sinf(radians);
     float c= body_->GetLinearVelocity().x;
+    float s = body_->GetLinearVelocity().y;
+    
+    float n = sqrtf(c*c + s*s);
+    c/=n;
+    s/=n;
+	
+	if( ! CGPointEqualToPoint(anchorPointInPoints_, CGPointZero) ){
+		x += c*-anchorPointInPoints_.x + -s*-anchorPointInPoints_.y;
+		y += s*-anchorPointInPoints_.x + c*-anchorPointInPoints_.y;
+	}
+	
+    CGAffineTransform ts = CGAffineTransformMakeScale(self.scaleX, self.scaleY);
+	// Rot, Translate Matrix
+	transform_ = CGAffineTransformMake( c,  s,
+									   -s,	c,
+									   x,	y );
+    
+    transform_ = CGAffineTransformConcat(ts, transform_);
+	
+	return transform_;
+
+    
+    
+    /*     transform_ = [super nodeToParentTransform];
+     float c= body_->GetLinearVelocity().x;
     float s = body_->GetLinearVelocity().y;
     
     float n = sqrtf(c*c + s*s);
@@ -112,7 +149,7 @@
 	transform_ = CGAffineTransformMake( c,  s,
 									   -s,	c,
 									   transform_.tx,	transform_.ty);
-    return transform_;
+    return transform_;*/
 }
 @end
 
@@ -120,7 +157,6 @@
 
 -(void)setupAnimationsForPlayer:(int)playerNum
 {
-    //CCSpriteBatchNode* sbn = [CCSpriteBatchNode batchNodeWithFile:@"char_faces_sprite_01.png"];
     
     float w=50,h=75;
     

@@ -48,9 +48,11 @@ typedef enum{
     CGPoint flingStartPosition;
     CCSprite* flingLineSprite;
     CCSprite* flingSprite;
+    float flingSpriteBalloonSize;
     
     CGPoint p1Pos, p2Pos;
     PlayerSprite *p1Sprite, *p2Sprite;
+    NSMutableArray* p1Balloons, *p2Balloons;
     
     CGPoint p1ShootingPos, p2ShootingPos;
     CCSprite *p1ShootAreaA,*p1ShootAreaB, *p2ShootAreaA,*p2ShootAreaB;
@@ -78,8 +80,13 @@ typedef enum{
 +(HelloWorldLayer*) getInstance;
 
 -(void)loadSounds;
+
+-(void)tickBalloonSpriteSize:(ccTime)dt;
 -(void)balloonDidBurst:(BalloonSprite*)bal;
 -(void)addPhysicsBodyToBeDeleted:(b2Body*)b;
+
+-(void)cleanupFlingSpriteAndRubberbands;
+-(CCSprite*)consumeBalloon;
 -(void)checkAndSwitchPlayersTurn;
 
 -(void)setPlayer1At:(CGPoint)player1Pos player2At:(CGPoint)player2Pos;
