@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#define dataManager [DataManager sharedManager]
+
 @interface DataManager : NSObject
+
++ (DataManager *) sharedManager;
+- (NSDictionary *)fetchUserData;
 
 @end
