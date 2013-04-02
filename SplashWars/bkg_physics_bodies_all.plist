@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<!-- created with http://www.physicseditor.de -->
+
+<plist version="1.0">
+	<dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>1</integer>
+            <key>ptm_ratio</key>
+            <real>32</real>
+        </dict>
+        <key>bodies</key>
+		<dict>
+
+			<key>bkg_game_02</key>
+			<dict>
+				<key>anchorpoint</key>
+                <string>{ 0.0000,0.0000 }</string>
+				<key>fixtures</key>
+				<array>
+
+					<dict>
+                        <key>density</key> <real>2</real>
+                        <key>friction</key> <real>0</real>
+                        <key>restitution</key> <real>0</real>
+                        <key>filter_categoryBits</key> <integer>1</integer>
+                        <key>filter_groupIndex</key> <integer>0</integer>
+                        <key>filter_maskBits</key> <integer>65535</integer>
+                        <key>isSensor</key> <false/>
+                        <key>id</key> <string></string>
+                        <key>fixture_type</key> <string>POLYGON</string>
+
+						<key>polygons</key>
+						<array>
+							<array>	
+								<string>{ 201.000,63.000 }</string>	
+								<string>{ 200.000,29.000 }</string>	
+								<string>{ 239.000,58.000 }</string>
+							</array>
+							<array>	
+								<string>{ 833.000,62.000 }</string>	
+								<string>{ 808.000,58.000 }</string>	
+								<string>{ 835.000,31.000 }</string>
+							</array>
+							<array>	
+								<string>{ 808.000,58.000 }</string>	
+								<string>{ 775.000,58.000 }</string>	
+								<string>{ 835.000,31.000 }</string>
+							</array>
+							<array>	
+								<string>{ 239.000,58.000 }</string>	
+								<string>{ 200.000,29.000 }</string>	
+								<string>{ 270.000,58.000 }</string>
+							</array>
+							<array>	
+								<string>{ 502.000,195.000 }</string>	
+								<string>{ 469.000,185.000 }</string>	
+								<string>{ 442.000,171.000 }</string>	
+								<string>{ 324.000,74.000 }</string>	
+								<string>{ 714.000,75.000 }</string>	
+								<string>{ 593.000,176.000 }</string>	
+								<string>{ 567.000,187.000 }</string>	
+								<string>{ 537.000,195.000 }</string>
+							</array>
+							<array>	
+								<string>{ 775.000,58.000 }</string>	
+								<string>{ 742.000,62.000 }</string>	
+								<string>{ 324.000,74.000 }</string>	
+								<string>{ 302.000,64.000 }</string>	
+								<string>{ 835.000,31.000 }</string>
+							</array>
+							<array>	
+								<string>{ 270.000,58.000 }</string>	
+								<string>{ 200.000,29.000 }</string>	
+								<string>{ 835.000,31.000 }</string>	
+								<string>{ 302.000,64.000 }</string>
+							</array>
+							<array>	
+								<string>{ 714.000,75.000 }</string>	
+								<string>{ 324.000,74.000 }</string>	
+								<string>{ 742.000,62.000 }</string>
+							</array>
+						</array>
+                    </dict>
+				</array>
+			</dict>
+			<key>bkg_game_01</key>
+			<dict>
+				<key>anchorpoint</key>
+                <string>{ 0.0000,0.0000 }</string>
+				<key>fixtures</key>
+				<array>
+
+					<dict>
+                        <key>density</key> <real>2</real>
+                        <key>friction</key> <real>0</real>
+                        <key>restitution</key> <real>0</real>
+                        <key>filter_categoryBits</key> <integer>1</integer>
+                        <key>filter_groupIndex</key> <integer>0</integer>
+                        <key>filter_maskBits</key> <integer>65535</integer>
+                        <key>isSensor</key> <false/>
+                        <key>id</key> <string></string>
+                        <key>fixture_type</key> <string>POLYGON</string>
+
+						<key>polygons</key>
+						<array>
+							<array>	
+								<string>{ -1.000,105.000 }</string>	
+								<string>{ -1.000,26.000 }</string>	
+								<string>{ 206.000,26.000 }</string>	
+								<string>{ 206.000,60.000 }</string>	
+								<string>{ 106.000,93.000 }</string>	
+								<string>{ 71.000,101.000 }</string>	
+								<string>{ 30.000,107.000 }</string>
+							</array>
+						</array>
+                    </dict>
+				</array>
+			</dict>
+			<key>bkg_game_03</key>
+			<dict>
+				<key>anchorpoint</key>
+                <string>{ 0.0000,0.0000 }</string>
+				<key>fixtures</key>
+				<array>
+
+					<dict>
+                        <key>density</key> <real>2</real>
+                        <key>friction</key> <real>0</real>
+                        <key>restitution</key> <real>0</real>
+                        <key>filter_categoryBits</key> <integer>1</integer>
+                        <key>filter_groupIndex</key> <integer>0</integer>
+                        <key>filter_maskBits</key> <integer>65535</integer>
+                        <key>isSensor</key> <false/>
+                        <key>id</key> <string></string>
+                        <key>fixture_type</key> <string>POLYGON</string>
+
+						<key>polygons</key>
+						<array>
+							<array>	
+								<string>{ 828.000,61.000 }</string>	
+								<string>{ 827.000,30.000 }</string>	
+								<string>{ 860.000,68.000 }</string>
+							</array>
+							<array>	
+								<string>{ 1029.000,30.000 }</string>	
+								<string>{ 1029.000,108.000 }</string>	
+								<string>{ 1002.000,108.000 }</string>	
+								<string>{ 967.000,101.000 }</string>	
+								<string>{ 925.000,90.000 }</string>	
+								<string>{ 860.000,68.000 }</string>	
+								<string>{ 827.000,30.000 }</string>
+							</array>
+						</array>
+                    </dict>
+				</array>
+			</dict>
+		</dict>
+	</dict>
+</plist>
+
