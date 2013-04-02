@@ -237,7 +237,7 @@
     NSString *sound = [NSString stringWithFormat:@"splash-hit-%d.mp3",soundnum];
     [[SimpleAudioEngine sharedEngine] playEffect:sound];
     
-    soundnum = arc4random()%7+1;
+    soundnum = arc4random()%6+1;
     sound = [NSString stringWithFormat:@"hit-response-%d.mp3",soundnum];
     [[SimpleAudioEngine sharedEngine]  performSelector:@selector(playEffect:) withObject:sound afterDelay:0.5];
 }

@@ -149,7 +149,6 @@ static HelloWorldLayer* _hWorldLayer = nil;
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"hit-response-4.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"hit-response-5.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"hit-response-6.mp3"];
-    [[SimpleAudioEngine sharedEngine] preloadEffect:@"hit-response-7.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"launch-1.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"launch-2.mp3"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"launch-3.mp3"];
