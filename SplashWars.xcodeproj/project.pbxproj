@@ -195,6 +195,12 @@
 		5C11598B170517150009FA4F /* bkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C115987170517150009FA4F /* bkg@2x.png */; };
 		5C11598E170519030009FA4F /* balloon_red_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C11598C170519030009FA4F /* balloon_red_small.png */; };
 		5C11598F170519030009FA4F /* balloon_red_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C11598D170519030009FA4F /* balloon_red_small@2x.png */; };
+		DC2DBB90170A11AA0035FF2F /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2DBB8F170A11AA0035FF2F /* DataManager.m */; };
+		DC2DBB94170A1F4D0035FF2F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2DBB93170A1F4D0035FF2F /* Game.m */; };
+		DC2DBB97170A1F6F0035FF2F /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2DBB96170A1F6F0035FF2F /* Move.m */; };
+		DC2DBB9A170A1F900035FF2F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2DBB99170A1F900035FF2F /* User.m */; };
+		DC2DBB9C170A232F0035FF2F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DC2DBB9B170A232F0035FF2F /* Default.png */; };
+		DC2DBB9E170A23530035FF2F /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DC2DBB9D170A23530035FF2F /* Default-Portrait~ipad.png */; };
 		DC9E4E291706178100D3B715 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9E4E281706178100D3B715 /* FacebookSDK.framework */; };
 		DC9E4E2B170617ED00D3B715 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DC9E4E2A170617ED00D3B715 /* FacebookSDKResources.bundle */; };
 		DC9E4E2D170617FD00D3B715 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DC9E4E2C170617FD00D3B715 /* FBUserSettingsViewResources.bundle */; };
@@ -211,7 +217,6 @@
 		DC9E4E4317061A5300D3B715 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9E4E3C17061A5300D3B715 /* SystemConfiguration.framework */; };
 		DC9E4E471706253D00D3B715 /* GamesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9E4E451706253D00D3B715 /* GamesListViewController.m */; };
 		DC9E4E481706253D00D3B715 /* GamesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9E4E461706253D00D3B715 /* GamesListViewController.xib */; };
-		DC9E4E4B170646E100D3B715 /* FBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9E4E4A170646E000D3B715 /* FBDataManager.m */; };
 		DC9E4E4D1706480B00D3B715 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9E4E4C1706480A00D3B715 /* LoginViewController.xib */; };
 		DC9E4E561706489100D3B715 /* bkg_moveslist.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9E4E4F1706489100D3B715 /* bkg_moveslist.png */; };
 		DC9E4E571706489100D3B715 /* bkg_moveslist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9E4E501706489100D3B715 /* bkg_moveslist@2x.png */; };
@@ -225,6 +230,8 @@
 		DC9E4E6317064C1B00D3B715 /* login-button-small.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9E4E5F17064C1A00D3B715 /* login-button-small.png */; };
 		DC9E4E6417064C1B00D3B715 /* login-button-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9E4E6017064C1B00D3B715 /* login-button-small@2x.png */; };
 		DC9E4E6717064DF800D3B715 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9E4E6617064DF700D3B715 /* LoginViewController.m */; };
+		DCB420141706C867006F936A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB420121706C867006F936A /* MainViewController.m */; };
+		DCB420151706C867006F936A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB420131706C867006F936A /* MainViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -603,6 +610,16 @@
 		5C115987170517150009FA4F /* bkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg@2x.png"; sourceTree = "<group>"; };
 		5C11598C170519030009FA4F /* balloon_red_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balloon_red_small.png; sourceTree = "<group>"; };
 		5C11598D170519030009FA4F /* balloon_red_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "balloon_red_small@2x.png"; sourceTree = "<group>"; };
+		DC2DBB8E170A11AA0035FF2F /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		DC2DBB8F170A11AA0035FF2F /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		DC2DBB92170A1F4D0035FF2F /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = Moels/Game.h; sourceTree = "<group>"; };
+		DC2DBB93170A1F4D0035FF2F /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Game.m; path = Moels/Game.m; sourceTree = "<group>"; };
+		DC2DBB95170A1F6F0035FF2F /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Move.h; path = Moels/Move.h; sourceTree = "<group>"; };
+		DC2DBB96170A1F6F0035FF2F /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Move.m; path = Moels/Move.m; sourceTree = "<group>"; };
+		DC2DBB98170A1F900035FF2F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Moels/User.h; sourceTree = "<group>"; };
+		DC2DBB99170A1F900035FF2F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Moels/User.m; sourceTree = "<group>"; };
+		DC2DBB9B170A232F0035FF2F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		DC2DBB9D170A23530035FF2F /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		DC9E4E281706178100D3B715 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		DC9E4E2A170617ED00D3B715 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		DC9E4E2C170617FD00D3B715 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
@@ -620,8 +637,6 @@
 		DC9E4E441706253D00D3B715 /* GamesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamesListViewController.h; sourceTree = "<group>"; };
 		DC9E4E451706253D00D3B715 /* GamesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamesListViewController.m; sourceTree = "<group>"; };
 		DC9E4E461706253D00D3B715 /* GamesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesListViewController.xib; sourceTree = "<group>"; };
-		DC9E4E49170646E000D3B715 /* FBDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDataManager.h; sourceTree = "<group>"; };
-		DC9E4E4A170646E000D3B715 /* FBDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDataManager.m; sourceTree = "<group>"; };
 		DC9E4E4C1706480A00D3B715 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		DC9E4E4F1706489100D3B715 /* bkg_moveslist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkg_moveslist.png; sourceTree = "<group>"; };
 		DC9E4E501706489100D3B715 /* bkg_moveslist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_moveslist@2x.png"; sourceTree = "<group>"; };
@@ -636,6 +651,9 @@
 		DC9E4E6017064C1B00D3B715 /* login-button-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-small@2x.png"; sourceTree = "<group>"; };
 		DC9E4E6517064DF600D3B715 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DC9E4E6617064DF700D3B715 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		DCB420111706C867006F936A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		DCB420121706C867006F936A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		DCB420131706C867006F936A /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -673,6 +691,8 @@
 		5C11572D1704F7360009FA4F = {
 			isa = PBXGroup;
 			children = (
+				DC2DBB9D170A23530035FF2F /* Default-Portrait~ipad.png */,
+				DC2DBB9B170A232F0035FF2F /* Default.png */,
 				5C11574E1704F7360009FA4F /* SplashWars */,
 				5C11573B1704F7360009FA4F /* Frameworks */,
 				5C1157391704F7360009FA4F /* Products */,
@@ -720,10 +740,10 @@
 		5C11574E1704F7360009FA4F /* SplashWars */ = {
 			isa = PBXGroup;
 			children = (
+				DC2DBB91170A1EB40035FF2F /* Models */,
 				5C1159591704F7390009FA4F /* AppDelegate.h */,
 				5C11595A1704F7390009FA4F /* AppDelegate.mm */,
-				DC9E4E49170646E000D3B715 /* FBDataManager.h */,
-				DC9E4E4A170646E000D3B715 /* FBDataManager.m */,
+				DC2DBB8E170A11AA0035FF2F /* DataManager.h */,
 				DC9E4E441706253D00D3B715 /* GamesListViewController.h */,
 				DC9E4E451706253D00D3B715 /* GamesListViewController.m */,
 				DC9E4E461706253D00D3B715 /* GamesListViewController.xib */,
@@ -731,12 +751,16 @@
 				5C1159631704F7390009FA4F /* GLES-Render.mm */,
 				5C11595C1704F7390009FA4F /* HelloWorldLayer.h */,
 				5C11595D1704F7390009FA4F /* HelloWorldLayer.mm */,
+				DC2DBB8F170A11AA0035FF2F /* DataManager.m */,
 				5C11595F1704F7390009FA4F /* IntroLayer.h */,
 				5C1159601704F7390009FA4F /* IntroLayer.mm */,
 				5C1157691704F7370009FA4F /* libs */,
 				DC9E4E6517064DF600D3B715 /* LoginViewController.h */,
 				DC9E4E6617064DF700D3B715 /* LoginViewController.m */,
 				DC9E4E4C1706480A00D3B715 /* LoginViewController.xib */,
+				DCB420111706C867006F936A /* MainViewController.h */,
+				DCB420121706C867006F936A /* MainViewController.m */,
+				DCB420131706C867006F936A /* MainViewController.xib */,
 				5C1159651704F7390009FA4F /* PhysicsSprite.h */,
 				5C1159661704F7390009FA4F /* PhysicsSprite.mm */,
 				5C11574F1704F7360009FA4F /* Resources */,
@@ -1294,6 +1318,19 @@
 			path = assets;
 			sourceTree = "<group>";
 		};
+		DC2DBB91170A1EB40035FF2F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DC2DBB92170A1F4D0035FF2F /* Game.h */,
+				DC2DBB93170A1F4D0035FF2F /* Game.m */,
+				DC2DBB95170A1F6F0035FF2F /* Move.h */,
+				DC2DBB96170A1F6F0035FF2F /* Move.m */,
+				DC2DBB98170A1F900035FF2F /* User.h */,
+				DC2DBB99170A1F900035FF2F /* User.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		DC9E4E4E1706489100D3B715 /* MovesList assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -1401,6 +1438,9 @@
 				DC9E4E6217064C1B00D3B715 /* login-button-small-pressed@2x.png in Resources */,
 				DC9E4E6317064C1B00D3B715 /* login-button-small.png in Resources */,
 				DC9E4E6417064C1B00D3B715 /* login-button-small@2x.png in Resources */,
+				DCB420151706C867006F936A /* MainViewController.xib in Resources */,
+				DC2DBB9C170A232F0035FF2F /* Default.png in Resources */,
+				DC2DBB9E170A23530035FF2F /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1563,8 +1603,12 @@
 				5C1159641704F7390009FA4F /* GLES-Render.mm in Sources */,
 				5C1159671704F7390009FA4F /* PhysicsSprite.mm in Sources */,
 				DC9E4E471706253D00D3B715 /* GamesListViewController.m in Sources */,
-				DC9E4E4B170646E100D3B715 /* FBDataManager.m in Sources */,
 				DC9E4E6717064DF800D3B715 /* LoginViewController.m in Sources */,
+				DCB420141706C867006F936A /* MainViewController.m in Sources */,
+				DC2DBB90170A11AA0035FF2F /* DataManager.m in Sources */,
+				DC2DBB94170A1F4D0035FF2F /* Game.m in Sources */,
+				DC2DBB97170A1F6F0035FF2F /* Move.m in Sources */,
+				DC2DBB9A170A1F900035FF2F /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

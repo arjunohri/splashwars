@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GamesListViewController : UIViewController
+@interface GamesListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
++(id) sharedInstance;
+
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (nonatomic, readwrite,strong) NSMutableArray* games;
+
+-(IBAction)createGameButtonHandler:(id)sender;
 
 @end

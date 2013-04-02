@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
+
+#define appDelegate (AppController *)[[UIApplication sharedApplication] delegate]
+
+@class MainViewController;
+@class LoginViewController;
+@class GamesListViewController;
+
 @interface AppController : NSObject <UIApplicationDelegate, CCDirectorDelegate>
 {
 	UIWindow *window_;
@@ -19,6 +26,12 @@
 
 @property (nonatomic, retain) UIWindow *window;
 @property (readonly) UINavigationController *navController;
+@property (strong, nonatomic) MainViewController *mainViewController;
+@property (strong, nonatomic) LoginViewController *loginViewController;
+@property (strong, nonatomic) GamesListViewController *gamesListViewController;
 @property (readonly) CCDirectorIOS *director;
+
+- (void)setupParse:(NSDictionary *)launchOptions;
+- (void)fbLoginSuccessful;
 
 @end

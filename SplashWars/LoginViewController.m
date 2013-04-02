@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 
@@ -29,11 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Facebook Profile";
-    
-    // Check if user is cached and linked to Facebook, if so, bypass login
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [self.navigationController pushViewController:[[FBUserSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:NO];
-    }
+    NSLog(@"LoginViewController loaded!");
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,6 +39,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (IBAction)loginButtonTouchHandler:(id)sender  {
     // The permissions requested from the user
@@ -58,10 +57,11 @@
             }
         } else if (user.isNew) {
             NSLog(@"User with facebook signed up and logged in!");
-            [self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+            [appDelegate fbLoginSuccessful];
+
         } else {
             NSLog(@"User with facebook logged in!");
-            [self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+            [appDelegate fbLoginSuccessful];
         }
     }];
 }
